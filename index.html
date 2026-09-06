@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Perch — the notch, finally useful</title>
+<meta name="description" content="Perch turns your Mac's notch into a calm, glanceable status HUD for developers. Builds, PRs, deploys, vitals — at a glance. Free, open source, local-only." />
+<meta property="og:title" content="Perch — your Mac's notch, turned into a status HUD" />
+<meta property="og:description" content="Glance, don't hunt. Builds, reviews, deploys and vitals in the notch. Free & open source." />
+<meta name="theme-color" content="#000000" />
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="assets/css/tokens.css" />
+<link rel="stylesheet" href="assets/css/base.css" />
+<link rel="stylesheet" href="assets/css/animations.css" />
+<link rel="stylesheet" href="assets/css/components.css" />
+<link rel="stylesheet" href="assets/css/sections.css" />
+</head>
+<body>
+
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
+
+<!-- ============ FIXED MENU BAR — site chrome + a living notch ============ -->
+<div class="menubar" role="banner">
+  <div class="mb-left">
+    <a class="mb-brand" href="#hero" aria-label="Perch home">
+      <svg class="bird" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 14c3 0 5-1 7-4 1.5-2.2 3.6-3 6-3-.4 2-1.4 3.3-2.8 4.2C15.6 12 17 12.5 19 12c-1 2.6-3.3 4-6.2 4-1 1.6-2.6 2.6-4.8 3l.6-2.2C6 19.4 4.6 17.4 4 14z"/></svg>
+      Perch
+    </a>
+    <nav class="mb-menu" id="mbMenu" aria-label="Primary">
+      <a href="#demo">Demo</a>
+      <a href="#customize">Customize</a>
+      <a href="#install">Install</a>
+    </nav>
+  </div>
+
+  <div class="mb-notch-wrap" aria-hidden="true">
+    <div class="mb-pill l good" id="barLeft"><span class="d"></span><span id="barLeftTxt">all good</span></div>
+    <div class="mb-notch"></div>
+    <div class="mb-pill r neutral" id="barRight"><span class="d"></span><span id="barRightTxt">Perch</span></div>
+  </div>
+
+  <div class="mb-right">
+    <span class="mb-clock mono" id="mbClock" aria-hidden="true">—</span>
+    <span class="mb-status" title="Live"></span>
+    <a class="mb-cta" data-magnetic href="#install"><span class="label">Get Perch</span></a>
+    <button class="mb-toggle" id="mbToggle" aria-label="Menu" aria-expanded="false">Menu</button>
+  </div>
+</div>
+
+<!-- ============ SECTION INDEX RAIL ============ -->
+<nav class="rail" id="rail" aria-label="Sections">
+  <a href="#hero" data-sec="hero"><span class="tick"></span><span class="rlabel">Perch</span></a>
+  <a href="#demo" data-sec="demo"><span class="tick"></span><span class="rlabel">Demo</span></a>
+  <a href="#customize" data-sec="customize"><span class="tick"></span><span class="rlabel">Customize</span></a>
+  <a href="#install" data-sec="install"><span class="tick"></span><span class="rlabel">Install</span></a>
+</nav>
+
+<main>
+<!-- ============ HERO — the whole first glance lives inside the laptop ============ -->
+<section id="hero" class="hero section wrap">
+  <div class="hero-laptop hero-fade">
+    <div class="laptop-scene">
+      <div class="laptop-tilt" id="laptopTilt">
+      <div class="laptop">
+        <div class="laptop-lid">
+          <div class="laptop-screen">
+            <div class="screen-glow"></div>
+            <div class="screen-ui">
+              <div class="screen-wall"></div>
+
+              <!-- macOS menu bar + the live notch HUD -->
+              <div class="screen-bar">
+                <span class="s-brand"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 14c3 0 5-1 7-4 1.5-2.2 3.6-3 6-3-.4 2-1.4 3.3-2.8 4.2C15.6 12 17 12.5 19 12c-1 2.6-3.3 4-6.2 4-1 1.6-2.6 2.6-4.8 3l.6-2.2C6 19.4 4.6 17.4 4 14z"/></svg> Perch</span>
+                <span class="s-clock" id="sClock">9:41</span>
+              </div>
+              <div class="s-notch"></div>
+              <div class="s-pill l"><span class="d" id="sLdot"></span><span class="stxt" id="sLtxt">CI</span><span class="s-mini" id="sLbarWrap"><i id="sLbar" style="width:100%"></i></span></div>
+              <div class="s-pill r"><span class="d" id="sRdot"></span><span class="stxt" id="sRtxt">2 PR</span></div>
+
+              <!-- A small live status widget, top-right, like a real desktop -->
+              <div class="screen-panel" id="sPanel"></div>
+
+              <!-- The message, on the desktop -->
+              <div class="screen-hero">
+                <span class="s-eyebrow">The notch, finally useful</span>
+                <h1>
+                  <span class="mask-line"><span style="--d:1.7s">Glance.</span></span>
+                  <span class="mask-line"><span style="--d:1.82s" class="bright">Don’t hunt.</span></span>
+                </h1>
+                <p>Your builds, reviews, deploys and machine vitals — live in the notch.</p>
+                <div class="cta-row">
+                  <a class="btn btn-primary" href="#install"><span class="label">Install in one command</span></a>
+                  <a class="btn btn-ghost btn-mono" href="https://github.com/NitinKumar004/perch" target="_blank" rel="noopener"><span class="label">$ view source</span></a>
+                </div>
+              </div>
+
+              <!-- Dock -->
+              <div class="screen-dock" aria-hidden="true">
+                <span class="dock-ico perch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 14c3 0 5-1 7-4 1.5-2.2 3.6-3 6-3-.4 2-1.4 3.3-2.8 4.2C15.6 12 17 12.5 19 12c-1 2.6-3.3 4-6.2 4-1 1.6-2.6 2.6-4.8 3l.6-2.2C6 19.4 4.6 17.4 4 14z"/></svg></span>
+                <span class="dock-ico"></span><span class="dock-ico"></span><span class="dock-ico"></span><span class="dock-ico"></span><span class="dock-ico"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section id="problem" class="problem section wrap">
+  <div class="grid-2">
+    <div data-reveal>
+      <span class="eyebrow">The tax you stopped noticing</span>
+      <h2 style="margin-top:1rem">You break flow a hundred times a day just to <span class="bright">check if it’s okay.</span></h2>
+    </div>
+    <div data-reveal style="--reveal-delay:.08s">
+      <p class="lead">Is the build green? Did the deploy land? Is anyone waiting on my review? Is my dev server still up? Every answer is an alt-tab, a browser tab, a lost thought. Perch answers all of them in the corner of your eye.</p>
+      <div class="tab-flicker" style="margin-top:2rem" aria-hidden="true">
+        <div class="win" data-win>
+          <div class="win-bar"><i></i><i></i><i></i><span>Actions</span></div>
+          <div class="win-body">
+            <div class="wrow"><span class="wd warning"></span><span class="wl">deploy.yml</span><span class="wg">running</span></div>
+            <div class="wbar"><b style="width:60%"></b></div>
+          </div>
+        </div>
+        <div class="win" data-win>
+          <div class="win-bar"><i></i><i></i><i></i><span>Pull requests</span></div>
+          <div class="win-body">
+            <div class="wrow"><span class="wd warning"></span><span class="wl">#2418 rate limiter</span></div>
+            <div class="wrow"><span class="wd"></span><span class="wl">#2417 docs</span></div>
+          </div>
+        </div>
+        <div class="win" data-win>
+          <div class="win-bar"><i></i><i></i><i></i><span>zsh</span></div>
+          <div class="win-body mono">
+            <div class="wt">$ npm run dev</div>
+            <div class="wt d">▸ listening :3000</div>
+          </div>
+        </div>
+        <div class="win" data-win>
+          <div class="win-bar"><i></i><i></i><i></i><span>Deploy</span></div>
+          <div class="win-body">
+            <div class="wrow"><span class="wd good"></span><span class="wl">api.acme.dev</span><span class="wg">up</span></div>
+            <div class="wrow"><span class="wd info"></span><span class="wl">web.acme.dev</span><span class="wg">deploying</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PINNED NOTCH DEMO ============ -->
+<section id="demo" class="demo-track">
+  <div class="demo-pin wrap">
+    <div class="demo-caption">
+      <h3 id="demoTitle">A build kicks off</h3>
+      <p id="demoText">The left pill tracks CI live — progress and all.</p>
+    </div>
+
+    <div class="demo-scale" aria-hidden="true">
+      <div class="demo-glow"></div>
+      <div class="device">
+        <div class="device-bar">
+          <div class="pill left info" id="demoLeft"><span class="dot"></span>CI <span class="mini-bar" id="demoBarWrap"><i id="demoBar" style="width:20%"></i></span><span id="demoCount">2/10</span></div>
+          <div class="notch"></div>
+          <div class="pill right neutral" id="demoRight"><span class="dot"></span><span id="demoRightTxt">3 PRs</span></div>
+        </div>
+        <div class="device-body">
+          <div class="panel open" id="demoPanel"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-progress" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+  </div>
+</section>
+
+<!-- ============ CUSTOMIZATION PLAYGROUND ============ -->
+<section id="customize" class="section wrap">
+  <div class="sec-head center" data-reveal>
+    <span class="eyebrow">Build your own notch</span>
+    <h2>You decide what shows, and where.</h2>
+    <p>Click a module to move it into the left pill, the right pill, or the panel — and watch your notch update, live.</p>
+  </div>
+
+  <!-- Live preview, centred -->
+  <div class="pg-preview" data-reveal aria-hidden="true">
+    <div class="device">
+      <div class="device-bar">
+        <div class="pill left neutral" id="pgLeft"><span class="dot"></span>—</div>
+        <div class="notch"></div>
+        <div class="pill right neutral" id="pgRight"><span class="dot"></span>—</div>
+      </div>
+      <div class="device-body">
+        <div class="panel open" id="pgPanel"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls, grouped in one surface -->
+  <div class="pg-panel" data-reveal>
+    <div class="pg-panel-head">
+      <span class="pg-label">Preset</span>
+      <div class="presets" role="group" aria-label="Presets">
+        <button class="preset-btn active" data-preset="work">work</button>
+        <button class="preset-btn" data-preset="focus">focus</button>
+        <button class="preset-btn" data-preset="ops">ops</button>
+      </div>
+    </div>
+    <div class="pg-cols">
+      <div class="pg-col">
+        <span class="pg-label">Modules — click to place</span>
+        <div class="pg-chips" id="pgChips" role="listbox" aria-label="Modules — click to change slot"></div>
+        <p class="pg-hint">Keep clicking a chip: Left → Right → Panel → Off.</p>
+      </div>
+      <div class="pg-col">
+        <span class="pg-label">Settings render themselves</span>
+        <div class="settings-demo" aria-hidden="true">
+          <div class="setting-row"><span>Show CI status</span><span class="switch on" data-switch></span></div>
+          <div class="setting-row"><span>Auto-open when red</span><span class="switch" data-switch></span></div>
+          <div class="setting-row"><span>Time format</span><span class="mini-select">24-hour ▾</span></div>
+        </div>
+        <p class="pg-hint">Toggles, dropdowns and fields — per module, no code.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTALL ============ -->
+<section id="install" class="install section wrap">
+  <div class="sec-head center">
+    <span class="eyebrow">Sixty seconds</span>
+    <h2>One command. No Apple ID.</h2>
+  </div>
+
+  <div class="terminal" data-reveal>
+    <div class="term-bar">
+      <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+      <span class="tname">zsh — perch</span>
+      <button class="copy-btn" id="copyBtn" aria-label="Copy install command">Copy</button>
+    </div>
+    <div class="term-body" id="term" aria-live="polite"></div>
+  </div>
+
+  <p class="note">No App Store, no password — a <code class="mono">curl</code> download isn’t quarantined, so it launches clean. Installs in seconds, updates itself in place.</p>
+  <div class="badges">
+    <span class="badge">free &amp; open source</span>
+    <span class="badge">macOS 14+</span>
+    <span class="badge">Apple Silicon + Intel</span>
+    <span class="badge">self-updating</span>
+  </div>
+</section>
+
+<!-- ============ UNDER THE HOOD ============ -->
+<section id="hood" class="hood">
+  <div class="section wrap">
+    <div class="sec-head">
+      <span class="eyebrow">For the people who’ll read the source</span>
+      <h2>Native, honest, and light.</h2>
+    </div>
+    <div class="hood-grid">
+      <div class="hood-item" data-reveal><span class="n">01</span><div><h4>Native Swift 6 + SwiftUI</h4><p>A background agent in the notch and menu bar. No Electron, no web view, no Dock icon.</p></div></div>
+      <div class="hood-item" data-reveal><span class="n">02</span><div><h4>Plug-in architecture</h4><p>Each feature is one module producing typed state. The shell just renders it — adding a module touches nothing else.</p></div></div>
+      <div class="hood-item" data-reveal><span class="n">03</span><div><h4>Accuracy engine</h4><p>Versioned, freshness-aware state. Out-of-order updates are rejected; stale data is surfaced honestly.</p></div></div>
+      <div class="hood-item" data-reveal><span class="n">04</span><div><h4>Kind to the API</h4><p>ETag conditional requests and a shared rate-limit backoff. Free 304s, near-zero idle cost.</p></div></div>
+    </div>
+    <div class="stat-row" data-reveal>
+      <div class="stat"><div class="big" data-count="15">15</div><div class="lbl">modules</div></div>
+      <div class="stat"><div class="big" data-count="76">76</div><div class="lbl">tests, E2E verified</div></div>
+      <div class="stat"><div class="big" data-count="0">0</div><div class="lbl">servers · accounts · trackers</div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer wrap">
+  <div class="f-top">
+    <div>
+      <div class="f-mark">Perch</div>
+      <p class="f-tag">The notch, finally useful.</p>
+    </div>
+    <div class="f-links">
+      <a href="https://github.com/NitinKumar004/perch" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/NitinKumar004/perch/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+    </div>
+  </div>
+  <p class="f-fine">Free and open source · macOS 14+ · Made for people who love calm tools.</p>
+</footer>
+
+<script src="assets/js/util.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/clock.js"></script>
+<script src="assets/js/spotlight.js"></script>
+<script src="assets/js/reveal.js"></script>
+<script src="assets/js/section-index.js"></script>
+<script src="assets/js/sheen.js"></script>
+<script src="assets/js/magnetic.js"></script>
+<script src="assets/js/modules-data.js"></script>
+<script src="assets/js/hero-hud.js"></script>
+<script src="assets/js/notch-demo.js"></script>
+<script src="assets/js/playground.js"></script>
+<script src="assets/js/terminal.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
