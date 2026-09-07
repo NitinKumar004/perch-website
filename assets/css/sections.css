@@ -109,6 +109,7 @@
 }
 @media (max-width: 620px) {
   .pill { font-size: 11px; height: 22px; padding: 0 8px; }
-  .pill.left { right: calc(50% + 75px + 5px); } .pill.right { left: calc(50% + 75px + 5px); }
+  .device-bar { gap: 12px; }
+  .device-bar .notch { width: 78px; }
   .demo-scale { transform: none; }
 }

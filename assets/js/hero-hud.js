@@ -20,6 +20,8 @@
       rows: [ ['info', 'Focus timer', '24:12 left'], ['good', 'Dev server', ':3000 up'], ['warning', 'Next: standup', 'in 8m'] ] },
     { l: { txt: '1✗', bar: null, dot: 'critical' }, r: { txt: 'up', dot: 'good' },
       rows: [ ['critical', 'acme/api', 'build failing'], ['good', 'Battery', '82% · charging'], ['neutral', 'Clock', '14:31'] ] },
+    { l: { txt: 'CPU 27% · RAM 61%', bar: null, dot: 'good' }, r: { txt: 'Warm', dot: 'warning' },
+      rows: [ ['good', 'CPU', '27% · steady'], ['info', 'Memory', '61%'], ['warning', 'Thermal', 'warming — watch it'] ] },
   ];
 
   const el = {
