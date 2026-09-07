@@ -10,7 +10,7 @@
   if (!chipsEl || !Perch.MODULES) return;
 
   // The subset offered in the playground (a readable handful, not all 15).
-  const KEYS = ['builds', 'prs', 'deploy', 'cpu', 'net', 'clock', 'port', 'timer', 'cal'];
+  const KEYS = ['combined', 'prs', 'builds', 'deploy', 'cpu', 'thermal', 'swap', 'disk', 'net', 'port', 'timer', 'clock', 'cal'];
   const byKey = Object.fromEntries(Perch.MODULES.map((m) => [m.key, m]));
   const mods = KEYS.map((k) => byKey[k]).filter(Boolean);
 

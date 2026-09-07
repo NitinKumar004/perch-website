@@ -154,12 +154,13 @@
 .device { width: min(600px, 92vw); border-radius: 18px; border: 1px solid var(--hairline-2); overflow: hidden;
   background: radial-gradient(110% 130% at 50% -25%, #1c1c22 0%, #0d0d10 52%, #070708 100%);
   box-shadow: 0 50px 90px -30px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.05); }
-.device-bar { position: relative; height: 34px; border-bottom: 1px solid rgba(255,255,255,0.09); background: linear-gradient(180deg, #202024, #17171b); }
-.device-bar .notch { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 92px; height: 19px; background: #000; border-radius: 0 0 11px 11px; z-index: 1; }
+/* Flex row — pills and the notch are siblings that can't overlap. */
+.device-bar { position: relative; height: 34px; display: flex; align-items: flex-start; justify-content: center; gap: 16px; padding-top: 5px; border-bottom: 1px solid rgba(255,255,255,0.09); background: linear-gradient(180deg, #202024, #17171b); }
+.device-bar .notch { position: static; transform: none; margin-top: -5px; width: 96px; height: 19px; background: #000; border-radius: 0 0 11px 11px; flex-shrink: 0; }
 .device-body { padding: 8px; }
 
 .pill {
-  position: absolute; top: 5px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 11px;
+  position: static; display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 11px; flex-shrink: 0;
   border-radius: 999px; font-size: 12px; font-weight: 600; color: var(--ink); white-space: nowrap;
   background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.18);
   transition: transform 0.5s var(--spring);
@@ -167,8 +168,6 @@
 .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--neutral); }
 .pill .mini-bar { width: 36px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.22); overflow: hidden; }
 .pill .mini-bar > i { display: block; height: 100%; width: 50%; background: #fff; border-radius: 2px; transition: width 0.5s var(--ease); }
-.pill.left { right: calc(50% + 46px + 24px); }
-.pill.right { left: calc(50% + 46px + 24px); }
 
 /* Panel inside a device body: in-flow, reveals with a class. */
 .panel { }
